@@ -434,6 +434,26 @@ def longest_collatz_sequence():
 	print("processing time: " + str(end - start))
 
 
+def lattice_paths():
+	"""
+	Starting in the top left corner of a 2×2 grid, and only being able to move
+	to the right and down, there are exactly 6 routes to the bottom right
+	corner.
+
+	How many such routes are there through a 20×20 grid?
+
+	:return:
+	"""
+	# 1 * 1 grid has 2 options
+	# 2 * 2 grid has 6 options
+	# 2 options for first grid, plus 2 * 2 options for second grid = 6
+	result = 1
+	grid_size = 20
+	for i in range(1, grid_size + 1):
+		result = result * (grid_size + i) / i
+	Helpers.pr(result)
+
+
 if __name__ == '__main__':
 	# even_fib_numbers()
 	# largest_prime_factor()
@@ -447,4 +467,5 @@ if __name__ == '__main__':
 	# largest_product_in_a_grid()
 	# highest_divisible_triangular_number()
 	# large_sum()
-	longest_collatz_sequence()
+	# longest_collatz_sequence()
+	lattice_paths()
