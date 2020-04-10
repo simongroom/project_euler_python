@@ -43,3 +43,10 @@ class Helpers:
 		if n == sqrt * sqrt:
 			result -= 1
 		return result
+
+	@staticmethod
+	def gcd(a, b):
+		if b == 0:
+			return a
+		else:
+			return Helpers.gcd(b, a % b)
