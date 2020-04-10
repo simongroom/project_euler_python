@@ -1,6 +1,6 @@
 # coding=utf-8
 import math
-from datetime import datetime
+from datetime import datetime, timedelta
 from time import time
 
 from helpers import Helpers
@@ -615,6 +615,46 @@ def maximum_path_sum_1():
 	Helpers.pr(result)
 
 
+def counting_sundays():
+	"""
+	You are given the following information, but you may prefer to do some
+	research for yourself.
+
+	1 Jan 1900 was a Monday.
+	Thirty days has September,
+	April, June and November.
+	All the rest have thirty-one,
+	Saving February alone,
+	Which has twenty-eight, rain or shine.
+	And on leap years, twenty-nine.
+	A leap year occurs on any year evenly divisible by 4, but not on a century
+	unless it is divisible by 400. How many Sundays fell on the first of the
+	month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
+
+	:return:
+	"""
+	weekdays = {
+		0: "MONDAY",
+		1: "TUESDAY",
+		2: "WEDNESDAY",
+		3: "THURSDAY",
+		4: "FRIDAY",
+		5: "SATURDAY",
+		6: "SUNDAY"
+	}
+	result = 0
+	start = datetime(year=1901, month=1, day=1)
+	end = datetime(year=2000, month=12, day=31)
+	while start <= end:
+		if start.day == 1 and weekdays.get(start.date().weekday()) == weekdays[6]:
+			result += 1
+		start = start + timedelta(days=1)
+	print("weekday is: " + str(start.date().weekday()))
+	print("day is: " + str(start.date().day))
+	print("day of week is: " + weekdays.get(start.date().weekday()))
+	Helpers.pr(result)
+
+
 if __name__ == '__main__':
 	# even_fib_numbers()
 	# largest_prime_factor()
@@ -632,4 +672,5 @@ if __name__ == '__main__':
 	# lattice_paths()
 	# power_digit_sum()
 	# number_letter_counts()
-	maximum_path_sum_1()
+	# maximum_path_sum_1()
+	counting_sundays()
