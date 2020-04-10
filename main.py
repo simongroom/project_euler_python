@@ -473,6 +473,82 @@ def power_digit_sum():
 	return Helpers.pr(result)
 
 
+def number_letter_counts():
+	"""
+	If the numbers 1 to 5 are written out in words: one, two, three, four, five,
+	then there are 3 + 3 + 5 + 4 + 4 = 19 letters used in total.
+
+	If all the numbers from 1 to 1000 (one thousand) inclusive were written out
+	in words, how many letters would be used?
+
+	NOTE: Do not count spaces or hyphens. For example, 342 (three hundred and
+	forty-two) contains 23 letters and 115 (one hundred and fifteen) contains
+	20 letters. The use of "and" when writing out numbers is in compliance with
+	British usage.
+
+	:return:
+	"""
+	def below_one_hundred(n):
+		if n < 20:
+			return uniques[n]
+		return tenths[n / 10] + uniques[n % 10]
+
+	result = 0
+	uniques = [
+		0,
+		len("one"),
+		len("two"),
+		len("three"),
+		len("four"),
+		len("five"),
+		len("six"),
+		len("seven"),
+		len("eight"),
+		len("nine"),
+		len("ten"),
+		len("eleven"),
+		len("twelve"),
+		len("thirteen"),
+		len("fourteen"),
+		len("fifteen"),
+		len("sixteen"),
+		len("seventeen"),
+		len("eighteen"),
+		len("nineteen"),
+	]
+
+	tenths = [
+		0,
+		0,
+		len("twenty"),
+		len("thirty"),
+		len("forty"),
+		len("fifty"),
+		len("sixty"),
+		len("seventy"),
+		len("eighty"),
+		len("ninety"),
+	]
+
+	top = 1000
+	hundred = len("hundred")
+	thousand = len("thousand")
+	for i in range(top + 1):
+		if i < 100:
+			result += below_one_hundred(i)
+			continue
+		h = int(math.floor(i / 100) % 10)
+		t = int(math.floor(i / 1000))
+		s = i % 100
+		if i > 999:
+			result += below_one_hundred(t) + thousand
+		if h != 0:
+			result += uniques[h] + hundred
+		if s != 0:
+			result += below_one_hundred(s) + len("and")
+	Helpers.pr(result)
+
+
 if __name__ == '__main__':
 	# even_fib_numbers()
 	# largest_prime_factor()
@@ -488,4 +564,5 @@ if __name__ == '__main__':
 	# large_sum()
 	# longest_collatz_sequence()
 	# lattice_paths()
-	power_digit_sum()
+	# power_digit_sum()
+	number_letter_counts()
