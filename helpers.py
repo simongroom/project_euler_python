@@ -1,3 +1,5 @@
+import math
+
 
 class Helpers:
 	def __init__(self):
@@ -23,3 +25,21 @@ class Helpers:
 			if n % i == 0:
 				return False
 		return True
+
+	@staticmethod
+	def number_of_divisors(n):
+		"""
+		find the number of divisors for supplied n
+
+		:param n: int
+		:return: int
+		"""
+		result = 0
+		sqrt = int(math.sqrt(n))
+		for i in range(1, sqrt + 1):
+			if n % i == 0:
+				result += 2
+		# if perfect square root, don't count twice
+		if n == sqrt * sqrt:
+			result -= 1
+		return result
